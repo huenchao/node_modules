@@ -24,8 +24,8 @@ module.exports = function send(child, message) {
     return setImmediate(child.emit.bind(child, 'message', message));
   }
 
-  // cluster.fork(): child.process is process  worker里包了process
-  // childprocess.fork(): child is process     
+  // cluster.fork(): child.process is process  worker里包了process https://github.com/nodejs/node/blob/1c4e984ed970612f129db2ba6f684311418ed3a2/lib/internal/cluster/master.js#L166
+  // childprocess.fork(): child is process    https://github.com/nodejs/node/blob/master/lib/internal/child_process.js#L381 
   var connected = child.process ? child.process.connected : child.connected;
 
   if (connected) {
